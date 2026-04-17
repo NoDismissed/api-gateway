@@ -1,0 +1,45 @@
+# ============================
+# Git & VCS
+# ============================
+.git
+.gitignore
+
+# ============================
+# Python cache & bytecode
+# ============================
+__pycache__/
+*.py[cod]
+
+# ============================
+# Virtual environments
+# ============================
+.venv/
+venv/
+
+# ============================
+# Environment files (SECURITY)
+# ============================
+.env
+.env.*
+!.env.example
+
+# ============================
+# Tests & coverage (not runtime)
+# ============================
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ============================
+# Editor / OS noise
+# ============================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ============================
+# CI specific
+# ============================
+.github/
