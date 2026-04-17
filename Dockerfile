@@ -2,12 +2,17 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+ENV PYTHONUNBUFFERED=1
 
-COPY . .
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+COPY app ./app
 
 ENV FLASK_APP=app.app
-ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=production
 
-CMD ["flask", "run"]
+EXPOSE 5000
+
+CMD ["sh", "-c", "flask run --host=0.0.0.0 --port=${PORT:-5000}"]

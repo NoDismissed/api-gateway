@@ -2,15 +2,18 @@ services:
   api-gateway:
     build: ./api-gateway
     ports:
-      - "8000:5000"
+      - "5000:5000"
     environment:
       USER_SERVICE_HOST: user-service
       USER_SERVICE_PORT: "50051"
+      JWT_SECRET: dev_secret
     depends_on:
       - user-service
 
   user-service:
     build: ./user-service
+    ports:
+      - "50051:50051"
     environment:
       DATABASE_URL: postgresql+psycopg://finance:finance@db:5432/microservice_user
     depends_on:
@@ -22,3 +25,8 @@ services:
       POSTGRES_USER: finance
       POSTGRES_PASSWORD: finance
       POSTGRES_DB: microservice_user
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
