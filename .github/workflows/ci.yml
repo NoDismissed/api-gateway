@@ -28,6 +28,8 @@ jobs:
         env:
           USER_SERVICE_HOST: localhost
           USER_SERVICE_PORT: "50051"
+          ORDER_SERVICE_HOST: localhost
+          ORDER_SERVICE_PORT: "50052"
           JWT_SECRET: dev_secret
         run: |
           pytest

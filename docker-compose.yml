@@ -6,6 +6,8 @@ services:
     environment:
       USER_SERVICE_HOST: user-service
       USER_SERVICE_PORT: "50051"
+      ORDER_SERVICE_HOST: order-service
+      ORDER_SERVICE_PORT: "50052"
       JWT_SECRET: dev_secret
     depends_on:
       - user-service

@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package order;
+
+// ========== ENUMS ==========
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  CREATED = 1;
+  PAID = 2;
+  SHIPPED = 3;
+  CANCELLED = 4;
+}
+
+// ========== MESSAGES ==========
+
+message Order {
+  int64 id = 1;
+  int64 user_id = 2;
+  OrderStatus status = 3;
+  double total_amount = 4;
+  string created_at = 5; // ISO-8601
+}
+
+// ========== CREATE ORDER ==========
+
+message CreateOrderRequest {
+  int64 requester_id = 1;
+  string requester_role = 2;
+  double total_amount = 3;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+// ========== GET ORDER ==========
+
+message GetOrderRequest {
+  int64 order_id = 1;
+  int64 requester_id = 2;
+  string requester_role = 3;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+// ========== LIST ORDERS ==========
+
+message ListOrdersRequest {
+  int64 requester_id = 1;
+  string requester_role = 2;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+}
+
+// ========== MARK PAID ==========
+
+message MarkOrderPaidRequest {
+  int64 order_id = 1;
+  int64 requester_id = 2;
+  string requester_role = 3;
+}
+
+message MarkOrderPaidResponse {
+  Order order = 1;
+}
+
+// ========== SHIP ORDER ==========
+
+message ShipOrderRequest {
+  int64 order_id = 1;
+  int64 requester_id = 2;
+  string requester_role = 3;
+}
+
+message ShipOrderResponse {
+  Order order = 1;
+}
+
+// ========== CANCEL ORDER ==========
+
+message CancelOrderRequest {
+  int64 order_id = 1;
+  int64 requester_id = 2;
+  string requester_role = 3;
+}
+
+message CancelOrderResponse {
+  Order order = 1;
+}
+
+// ========== SERVICE ==========
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+  rpc MarkOrderPaid(MarkOrderPaidRequest) returns (MarkOrderPaidResponse);
+  rpc ShipOrder(ShipOrderRequest) returns (ShipOrderResponse);
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+}
