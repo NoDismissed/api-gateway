@@ -41,7 +41,7 @@ def test_get_order_not_found(client, make_token):
     rpc_error = grpc.RpcError()
     rpc_error.code = lambda: grpc.StatusCode.NOT_FOUND
     with patch(
-        "app.routes.orders.get_order",
+        "app.routes.orders.order_client.get_order",
         side_effect = rpc_error,
     ):
         res = client.get(
