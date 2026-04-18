@@ -50,4 +50,9 @@ Servidor para un sistema de microservicios (orquestador)
   -H "Content-Type: application/json" \
   -d '{"email":"gateway@test.com","password":"hash"}'
   (login)
+- curl -X POST http://localhost:5000/orders \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"total_amount": 123.45}'
+  (crear orden)
 - 
